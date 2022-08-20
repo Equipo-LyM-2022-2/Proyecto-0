@@ -1,8 +1,51 @@
 
-program = str(input("Input your program's file name to validate its syntax: "))
+# PRUEBA PARSER.txt
+
+fileName = str(input("Input your program's file name to validate its syntax: "))
+
+file = open(fileName, mode="r")
+
+rawProgram = (file.read())
+file.close()
+
+program = rawProgram.replace("\n", "")
+program = program.split(";")
+program = program[:-1]
+
 print(program)
 
-file = open("PRUEBA PARSER.txt", mode="r")
+def cWalk():
+    pass
 
-print(file.read())
+def cJump():
+    pass
 
+def cJumpTo():
+    pass
+
+def cVeer():
+    pass
+
+def cLook():
+    pass
+
+def cDrop():
+    pass
+
+def cGrab():
+    pass
+
+def cGet():
+    pass
+
+def cFree():
+    pass
+
+def cPop():
+    pass
+
+def cWalk():
+    pass
+
+def cWalk():
+    pass
