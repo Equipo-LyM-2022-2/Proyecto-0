@@ -1,3 +1,8 @@
 
 program = str(input("Input your program's file name to validate its syntax: "))
 print(program)
+
+file = open("PRUEBA PARSER.txt", mode="r")
+
+print(file.read())
+
