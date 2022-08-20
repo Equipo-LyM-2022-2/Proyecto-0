@@ -9,8 +9,8 @@ rawProgram = (file.read())
 file.close()
 
 program = rawProgram.replace("\n", "")
+program = program.replace(" ", "")
 program = program.split(";")
-program = program[:-1]
 
 print(program)
 
