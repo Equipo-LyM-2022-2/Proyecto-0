@@ -23,7 +23,7 @@ for line in program:
         isCorrect = False
         break
 
-    if program.index(line) == (len(program) -1) and line.startswith("GORP", (len(program) - 3)) == False:
+    if program.index(line) == (len(program) -1) and line.endswith("GORP") == False:
         isCorrect = False
         break
 
