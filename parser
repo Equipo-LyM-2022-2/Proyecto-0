@@ -12,40 +12,60 @@ program = rawProgram.replace("\n", "")
 program = program.replace(" ", "")
 program = program.split(";")
 
-print(program)
+#Loop para que vaya linea por linea chequeando que función se usa y llame la función respectiva. 
 
-def cWalk():
+# TODO J
+def cName(line):
     pass
 
-def cJump():
+def cWalk(line):
     pass
 
-def cJumpTo():
+# TODO N
+def cJump(line):
     pass
 
-def cVeer():
+
+def cJumpTo(line):
     pass
 
-def cLook():
+def cVeer(line):
     pass
 
-def cDrop():
+def cLook(line):
     pass
 
-def cGrab():
+# TODO N
+def cDrop(line):
     pass
 
-def cGet():
+# TODO N
+def cGrab(line):
     pass
 
-def cFree():
+# TODO N
+def cGet(line):
     pass
 
-def cPop():
+# TODO N
+def cFree(line):
     pass
 
-def cWalk():
+# TODO N
+def cPop(line):
     pass
 
-def cWalk():
+def cWalk(line):
+    pass
+
+# TODO N
+def cConditionals(line):
+    pass
+
+# TODO J
+def cLoop(line):
+    pass
+
+# TODO J
+def cRepeat(line):
     pass
