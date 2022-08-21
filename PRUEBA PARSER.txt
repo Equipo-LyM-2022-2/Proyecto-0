@@ -20,5 +20,3 @@ n =6;
 putCB (2 ,1)
 }
 GORP
-
-walk(x)

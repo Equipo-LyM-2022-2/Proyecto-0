@@ -1,8 +1,6 @@
 
 # PRUEBA PARSER.txt
 
-
-
 fileName = str(input("Input your program's file name to validate its syntax: "))
 
 file = open(fileName, mode="r")
@@ -14,11 +12,35 @@ program = rawProgram.replace("\n", "")
 program = program.replace(" ", "")
 program = program.split(";")
 
+# El programa siempre empieza siendo correcto hasta que se pruebe lo contrario.
+
+isCorrect = True
+
+# TODO Loop para que vaya linea por linea chequeando que función se usa y llame la función respectiva.
+
 for line in program:
-    if "var" in line:
-        line = line.replace("var","")
-        line = line.replace("PROG", "")
-        variable_list = line.split(",")
+    if program.index(line) == 0 and line.startswith("PROG") == False:
+        isCorrect = False
+        break
+
+    if program.index(line) == (len(program) -1) and line.startswith("GORP", (len(program) - 3)) == False:
+        isCorrect = False
+        break
+
+
+# Print dependiendo de si el programa es correcto o no
+
+if isCorrect == True:
+    print("Congratulations! Your program has valid syntax.")
+
+else:
+    print("Unfortunately your program does not have a valid syntax...")
+
+# TODO J
+def cName(line):
+    line = line.replace("var","")
+    line = line.replace("PROG", "")
+    variable_list = line.split(",")
         
 
     if "=" in line:
@@ -33,19 +55,6 @@ for line in program:
 
         except ValueError:
             print("This is not a valid program")
-        
-
-       
-
-
-
-        
-        
-#Loop para que vaya linea por linea chequeando que función se usa y llame la función respectiva. 
-
-# TODO J
-def cName(line):
-    pass
 
 def cWalk(line):
     pass
@@ -54,7 +63,6 @@ def cWalk(line):
 def cJump(line):
 
     pass
-
 
 def cJumpTo(line):
     pass
@@ -100,3 +108,24 @@ def cLoop(line):
 # TODO J
 def cRepeat(line):
     pass
+
+# Loop Nico 
+#for line in program:
+#    if "var" in line:
+#        line = line.replace("var","")
+#        line = line.replace("PROG", "")
+#        variable_list = line.split(",")
+#        
+#
+#    if "=" in line:
+#        is_variable = line[0]
+
+#        if is_variable not in variable_list:
+#            print("This is not a valid program")
+
+#        try:
+#            isInt = int(line[-1])
+            
+
+#        except ValueError:
+#            print("This is not a valid program")
