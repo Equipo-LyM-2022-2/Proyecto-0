@@ -1,6 +1,6 @@
 PROG
 var n , x , y ;
-ROC putCB (c , b )
+PROC putCB (c , b )
 {
 drop( c ) ;
 f r e e ( b ) ;
