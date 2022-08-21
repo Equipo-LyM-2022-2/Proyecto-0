@@ -16,7 +16,7 @@ program = program.split(";")
 
 # TODO J
 def cName(line):
-    pass
+    n = 1
 
 def cWalk(line):
     pass
