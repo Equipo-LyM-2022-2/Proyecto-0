@@ -22,10 +22,12 @@ for line in program:
     if program.index(line) == 0 and line.startswith("PROG") == False:
         isCorrect = False
         break
+        
 
     if program.index(line) == (len(program) -1) and line.startswith("GORP", (len(program) - 3)) == False:
         isCorrect = False
         break
+        
 
 
 # Print dependiendo de si el programa es correcto o no
@@ -55,14 +57,35 @@ def cName(line):
 
         except ValueError:
             print("This is not a valid program")
+    
+def cWalk(line, variable_list):
+    if "walk" in line:
+        first_par_index = line.index("(")
+        last_par_index = line.index(")")
+        is_variable = (line[first_par_index+1 : last_par_index])
 
-def cWalk(line):
-    pass
+        if is_variable == int:
+            isCorrect == False
+        if is_variable not in variable_list:
+            isCorrect == False
+
+
+    
 
 # TODO N
-def cJump(line):
+def cJump(line, variable_list):
+    if "jump" in line:
+        first_par_index = line.index("(")
+        last_par_index = line.index(")")
+        is_variable = (line[first_par_index+1 : last_par_index])
 
-    pass
+        if is_variable == int:
+            isCorrect == False
+        if is_variable not in variable_list:
+            isCorrect == False
+
+
+    
 
 def cJumpTo(line):
     pass
@@ -74,27 +97,73 @@ def cLook(line):
     pass
 
 # TODO N
-def cDrop(line):
-    pass
+def cDrop(line, variable_list):
+
+    if "drop" in line:
+        first_par_index = line.index("(")
+        last_par_index = line.index(")")
+        is_variable = (line[first_par_index+1 : last_par_index])
+
+        if is_variable == int:
+            isCorrect == False
+        if is_variable not in variable_list:
+            isCorrect == False
 
 # TODO N
-def cGrab(line):
-    pass
+def cGrab(line, variable_list):
+
+    if "grab" in line:
+        first_par_index = line.index("(")
+        last_par_index = line.index(")")
+        is_variable = (line[first_par_index+1 : last_par_index])
+
+        if is_variable == int:
+            isCorrect == False
+        if is_variable not in variable_list:
+            isCorrect == False
 
 # TODO N
-def cGet(line):
-    pass
+def cGet(line, variable_list):
+
+    if "get" in line:
+        first_par_index = line.index("(")
+        last_par_index = line.index(")")
+        is_variable = (line[first_par_index+1 : last_par_index])
+
+        if is_variable == int:
+            isCorrect == False
+        if is_variable not in variable_list:
+            isCorrect == False
+    
 
 # TODO N
-def cFree(line):
-    P = 134
-    pass
+def cFree(line, variable_list):
+
+    if "free" in line:
+        first_par_index = line.index("(")
+        last_par_index = line.index(")")
+        is_variable = (line[first_par_index+1 : last_par_index])
+
+        if is_variable == int:
+            isCorrect == False
+        if is_variable not in variable_list:
+            isCorrect == False
+    
 
 # TODO N
-def cPop(line):
-    pass
+def cPop(line, variable_list):
 
-def cWalk(line):
+    if "pop" in line:
+        first_par_index = line.index("(")
+        last_par_index = line.index(")")
+        is_variable = (line[first_par_index+1 : last_par_index])
+
+        if is_variable == int:
+            isCorrect == False
+        if is_variable not in variable_list:
+            isCorrect == False
+
+def cWalk2variables(line):
     pass
 
 # TODO N
