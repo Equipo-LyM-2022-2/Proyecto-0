@@ -209,166 +209,133 @@ def cConditionals(line):
         isCorrect = False
     line.split("(")
     line.split(")")"""
-    def contar_parentesis(texto):
+    if line[-2:len(line)] != "fi":
+        return "Basura"
 
-        open_parenth = 0
-        close_parenth = 0
+    if line[2] != "(":
+        return "Basura"
+    
+    if contar_parentesis(line) >0 and contar_parentesis(line) % 2 != 0:
+        return "Basura"
+    
+    if contar_brackets(line) > 0 and contar_brackets(line) % 2 != 0:
+        return "Basura"
 
-        for i in texto:
-            if i == "(":
-                open_parenth += 1
+    partes = separar_condicional_en_partes(line)
+    #print(partes)
+
+
+    # mayor a 3 por si hay un ELSE
+    if len(partes) > 3 or len(partes) == 0:
+        return "Basura"
+    
+    if len(partes) == 2:
+        condition = partes[0]
+
+        block = partes[1]
+    
+    elif len(partes) == 3:
+        condition = partes[0]
+
+        block = partes[1]
+
+        else_condition = partes[2]
+
+    #for i in partes:
+    print(separar_en_tokens(condition))
+    
+def contar_parentesis(line):
+
+    open_parenth = 0
+    close_parenth = 0
+
+    for i in line:
+        if i == "(":
+            open_parenth += 1
         
-            elif i == ")":
-                close_parenth +=1
+        elif i == ")":
+            close_parenth +=1
     
-        return open_parenth + close_parenth
+    return open_parenth + close_parenth
 
-    def contar_brackets(texto):
+def contar_brackets(line):
 
-        open_bracket = 0
-        close_bracket = 0
+    open_bracket = 0
+    close_bracket = 0
 
-        for i in texto:
-            if i == "{":
-                open_bracket += 1
+    for i in line:
+        if i == "{":
+            open_bracket += 1
         
-            elif i == "}":
-                close_bracket +=1
+        elif i == "}":
+            close_bracket +=1
     
-        return open_bracket + close_bracket
+    return open_bracket + close_bracket
 
-    def separar_condicional_en_partes(texto:str):
+def separar_condicional_en_partes(line:str):
 
-        #texto = "if(canWalk(west,1)){walk(west,1)}fi"
+    #texto = "if(canWalk(west,1)){walk(west,1)}fi"
 
-        partes = []
+    partes = []
 
-        for i in texto:
-            if i == "{":
-                partes.append(texto[0 : texto.index(i)])
-                partes.append(texto[texto.index(i) : len(texto)])
-        return partes
-    
-
+    for i in line:
+        if i == "{":
+            partes.append(line[0 : line.index(i)])
+            partes.append(line[line.index(i) : len(line)])
+    return partes
     
 
+    
 
-    def separar_en_tokens(texto:str):
 
-        #texto = "i f ( canWalk ( west ,1) ) { walk( west ,1) } fi"
-        texto = texto.replace(" ", "")
-        texto = texto.replace("if", "")
-        texto = texto.replace("fi", "")
-        #print(texto)
+def separar_en_tokens(line:str):
 
-        tokens = []
-        #token_found = False
-        for i in texto:
-            if i == "(":
-                #print(texto.index(i))
-                for j in range(1, (len(texto)-1)):
-                    #print(texto[j])
-                    if texto[j] == ")":
-                        #token_found = True
-                        ind_inf = texto.index(i)
-                        ind_sup = int((j))
-                        tokens.append(texto[ind_inf:ind_sup+1])
-                        #print(tokens)
-                        if texto.index(i) == 0:
-                            #print("broo")
-                            texto = texto[1:j+1] + texto[j+2:len(texto)] 
-                            #print(texto)
+    #line = "i f ( canWalk ( west ,1) ) { walk( west ,1) } fi"
+    line = line.replace(" ", "")
+    line = line.replace("if", "")
+    line = line.replace("fi", "")
+    #print(line)
 
-                            break
+    tokens = []
+    #token_found = False
+    for i in line:
+        if i == "(":
+            #print(line.index(i))
+            for j in range(1, (len(line)-1)):
+                #print(line[j])
+                if line[j] == ")":
+                    #token_found = True
+                    ind_inf = line.index(i)
+                    ind_sup = int((j))
+                    tokens.append(line[ind_inf:ind_sup+1])
+                    #print(tokens)
+                    if line.index(i) == 0:
+                        #print("broo")
+                        line = line[1:j+1] + line[j+2:len(line)] 
+                        #print(line)
 
-                        else:
-                            texto = texto[ind_inf+1:j] + texto[j+1:len(texto)]
-                            #print(texto + "2tttt")
-                            break
+                        break
+
+                    else:
+                        line = line[ind_inf+1:j] + line[j+1:len(line)]
+                        #print(line + "2tttt")
+                        break
             
                 
 
-        #print(token_found)
+    #print(token_found)
 
 
-        #texto = texto.split(")")
-        #print(texto)
-        return(tokens)
+    #line = line.split(")")
+    #print(line)
+    return(tokens)
 
-
-    tokens_lista = separar_en_tokens("i f ( canWalk ( west ,1) ) { walk( west ,1) } fi")
-    #print(tokens_lista)
-
-
-    separado = separar_condicional_en_partes("i f ( canWalk ( west ,1) ) { walk( west ,1) } fi")
-#print(separado)
-
-    tokens_parte_1 = separar_en_tokens(separado[1])
-    #print(tokens_parte_1)
-
-
-    def check_conditional(texto:str):
-    
-        if texto[-2:len(texto)] != "fi":
-            return "Basura"
-
-        if texto[2] != "(":
-            return "Basura"
-    
-        if contar_parentesis(texto) >0 and contar_parentesis(texto) % 2 != 0:
-            return "Basura"
-    
-        if contar_brackets(texto) > 0 and contar_brackets(texto) % 2 != 0:
-            return "Basura"
-
-        partes = separar_condicional_en_partes(texto)
-        #print(partes)
-
-
-        # mayor a 3 por si hay un ELSE
-        if len(partes) > 3 or len(partes) == 0:
-            return "Basura"
-    
-        if len(partes) == 2:
-            condition = partes[0]
-
-            block = partes[1]
-    
-        elif len(partes) == 3:
-            condition = partes[0]
-
-            block = partes[1]
-
-            else_condition = partes[2]
-
-        #for i in partes:
-        print(separar_en_tokens(condition))
-        
-    
-    
-    
 
 
 
     
     
-        return "Sisirvebro"
 
-    
-    
-
-#num_parentj = contar_parentesis("i f ( canWalk ( west ,1) ) { walk( west ,1) } fi")
-#print(num_parentj)
-    
-
-#check = check_conditional("if(canWalk(west,1)){walk(west,1)}fi")
-#texto = "if(canWalk(west,1)){walk(west,1)}fi"
-#print(check)
-
-#print(separar_en_tokens("canWalk(west,1)"))
-
-
-    return isCorrect
     
 
 # TODO J
