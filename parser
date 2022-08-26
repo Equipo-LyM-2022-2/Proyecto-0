@@ -347,24 +347,3 @@ def cLoop(line):
 # TODO J
 def cRepeat(line):
     pass
-
-# Loop Nico 
-#for line in program:
-#    if "var" in line:
-#        line = line.replace("var","")
-#        line = line.replace("PROG", "")
-#        variable_list = line.split(",")
-#        
-#
-#    if "=" in line:
-#        is_variable = line[0]
-
-#        if is_variable not in variable_list:
-#            print("This is not a valid program")
-
-#        try:
-#            isInt = int(line[-1])
-            
-
-#        except ValueError:
-#            print("This is not a valid program")
