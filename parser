@@ -1,7 +1,9 @@
 
 # PRUEBA PARSER.txt
 
-print(" ")
+from inspect import isclass
+
+
 fileName = str(input("Input your program's file name to validate its syntax: "))
 print(" ")
 
@@ -17,36 +19,20 @@ program = program.replace(" ", "")
 
 isCorrect = True
 
-
-# =====================================================================================================
-
-# Chequeo rápido del inicio y final del programa
-
-if program.startswith("PROG") == False:
-        isCorrect = False
-
-if program.endswith("GORP") == False:
-        isCorrect = False
-
 # TODO Loop para que vaya linea por linea chequeando que función se usa y llame la función respectiva.
 
-# Loop intento # 1
-#for line in program:
-#    print(line)
-#    if program.index(line) == 0 and line.startswith("PROG") == False:
-#        isCorrect = False
-#        break
+for line in program:
+    if program.index(line) == 0 and line.startswith("PROG") == False:
+        isCorrect = False
+        break
+        
+# Chequeo rápido del inicio y final del programa
+
+    if program.index(line) == (len(program) -1) and line.endswith("GORP") == False:
+        isCorrect = False
+        break
         
 
-#    if program.index(line) == (len(program) -1) and line.endswith("GORP") == False:
-#        isCorrect = False
-#        break
-
-# Loop intento # 2
-
-charIndex = 0
-while isCorrect == True:
-    pass
 
 # Print dependiendo de si el programa es correcto o no
 
@@ -56,14 +42,16 @@ if isCorrect == True:
 
 else:
     print("Unfortunately your program does not have a valid syntax...")
-    print(" ")
 
 
-# =====================================================================================================
+#TODO Variable_list
 
-
-# Funciones que se llaman dependiendo de la línea
-
+"""for line in program:
+    if line != "{" and line != "}":
+        line = line.replace("var","")
+        line = line.replace("PROG", "")
+        line = line.replace("PROC", "")
+        line = line.replace("")"""
 # TODO J
 def cName(line):
     line = line.replace("var","")
@@ -75,14 +63,18 @@ def cName(line):
         is_variable = line[0]
 
         if is_variable not in variable_list:
-            print("This is not a valid program")
-
+            isCorrect = False
+            
         try:
-            isInt = int(line[-1])
+            int(line[-1])
+            
             
 
         except ValueError:
+            isCorrect = False
             print("This is not a valid program")
+    
+    return isCorrect
     
 def cWalk(line, variable_list):
     if "walk" in line:
@@ -94,6 +86,8 @@ def cWalk(line, variable_list):
             isCorrect == False
         if is_variable not in variable_list:
             isCorrect == False
+
+    return isCorrect
 
 
     
@@ -110,6 +104,7 @@ def cJump(line, variable_list):
         if is_variable not in variable_list:
             isCorrect == False
 
+    return isCorrect
 
     
 
@@ -135,6 +130,8 @@ def cDrop(line, variable_list):
         if is_variable not in variable_list:
             isCorrect == False
 
+    return isCorrect
+
 # TODO N
 def cGrab(line, variable_list):
 
@@ -148,6 +145,8 @@ def cGrab(line, variable_list):
         if is_variable not in variable_list:
             isCorrect == False
 
+    return isCorrect
+
 # TODO N
 def cGet(line, variable_list):
 
@@ -160,6 +159,8 @@ def cGet(line, variable_list):
             isCorrect == False
         if is_variable not in variable_list:
             isCorrect == False
+        
+    return isCorrect
     
 
 # TODO N
@@ -175,6 +176,8 @@ def cFree(line, variable_list):
         if is_variable not in variable_list:
             isCorrect == False
     
+    return isCorrect
+    
 
 # TODO N
 def cPop(line, variable_list):
@@ -188,13 +191,154 @@ def cPop(line, variable_list):
             isCorrect == False
         if is_variable not in variable_list:
             isCorrect == False
+    
+    return isCorrect
 
 def cWalk2variables(line):
     pass
 
 # TODO N
 def cConditionals(line):
-    pass
+    """open_parenth_size = 0
+    close_parenth_size = 0
+    for i in line:
+        if i == "(":
+            open_parenth_size += 1
+        if i == ")":
+            close_parenth_size += 1
+    
+    if open_parenth_size != close_parenth_size:
+        isCorrect = False
+    line.split("(")
+    line.split(")")"""
+    if line[-2:len(line)] != "fi":
+        return "Basura"
+
+    if line[2] != "(":
+        return "Basura"
+    
+    if contar_parentesis(line) >0 and contar_parentesis(line) % 2 != 0:
+        return "Basura"
+    
+    if contar_brackets(line) > 0 and contar_brackets(line) % 2 != 0:
+        return "Basura"
+
+    partes = separar_condicional_en_partes(line)
+    #print(partes)
+
+
+    # mayor a 3 por si hay un ELSE
+    if len(partes) > 3 or len(partes) == 0:
+        return "Basura"
+    
+    if len(partes) == 2:
+        condition = partes[0]
+
+        block = partes[1]
+    
+    elif len(partes) == 3:
+        condition = partes[0]
+
+        block = partes[1]
+
+        else_condition = partes[2]
+
+    #for i in partes:
+    print(separar_en_tokens(condition))
+    
+def contar_parentesis(line):
+
+    open_parenth = 0
+    close_parenth = 0
+
+    for i in line:
+        if i == "(":
+            open_parenth += 1
+        
+        elif i == ")":
+            close_parenth +=1
+    
+    return open_parenth + close_parenth
+
+def contar_brackets(line):
+
+    open_bracket = 0
+    close_bracket = 0
+
+    for i in line:
+        if i == "{":
+            open_bracket += 1
+        
+        elif i == "}":
+            close_bracket +=1
+    
+    return open_bracket + close_bracket
+
+def separar_condicional_en_partes(line:str):
+
+    #texto = "if(canWalk(west,1)){walk(west,1)}fi"
+
+    partes = []
+
+    for i in line:
+        if i == "{":
+            partes.append(line[0 : line.index(i)])
+            partes.append(line[line.index(i) : len(line)])
+    return partes
+    
+
+    
+
+
+def separar_en_tokens(line:str):
+
+    #line = "i f ( canWalk ( west ,1) ) { walk( west ,1) } fi"
+    line = line.replace(" ", "")
+    line = line.replace("if", "")
+    line = line.replace("fi", "")
+    #print(line)
+
+    tokens = []
+    #token_found = False
+    for i in line:
+        if i == "(":
+            #print(line.index(i))
+            for j in range(1, (len(line)-1)):
+                #print(line[j])
+                if line[j] == ")":
+                    #token_found = True
+                    ind_inf = line.index(i)
+                    ind_sup = int((j))
+                    tokens.append(line[ind_inf:ind_sup+1])
+                    #print(tokens)
+                    if line.index(i) == 0:
+                        #print("broo")
+                        line = line[1:j+1] + line[j+2:len(line)] 
+                        #print(line)
+
+                        break
+
+                    else:
+                        line = line[ind_inf+1:j] + line[j+1:len(line)]
+                        #print(line + "2tttt")
+                        break
+            
+                
+
+    #print(token_found)
+
+
+    #line = line.split(")")
+    #print(line)
+    return(tokens)
+
+
+
+
+    
+    
+
+    
 
 # TODO J
 def cLoop(line):
