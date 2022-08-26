@@ -1,7 +1,9 @@
 
 # PRUEBA PARSER.txt
 
+print(" ")
 fileName = str(input("Input your program's file name to validate its syntax: "))
+print(" ")
 
 file = open(fileName, mode="r")
 
@@ -10,33 +12,57 @@ file.close()
 
 program = rawProgram.replace("\n", "")
 program = program.replace(" ", "")
-program = program.split(";")
 
 # El programa siempre empieza siendo correcto hasta que se pruebe lo contrario.
 
 isCorrect = True
 
+
+# =====================================================================================================
+
+# Chequeo rápido del inicio y final del programa
+
+if program.startswith("PROG") == False:
+        isCorrect = False
+
+if program.endswith("GORP") == False:
+        isCorrect = False
+
 # TODO Loop para que vaya linea por linea chequeando que función se usa y llame la función respectiva.
 
-for line in program:
-    if program.index(line) == 0 and line.startswith("PROG") == False:
-        isCorrect = False
-        break
+# Loop intento # 1
+#for line in program:
+#    print(line)
+#    if program.index(line) == 0 and line.startswith("PROG") == False:
+#        isCorrect = False
+#        break
         
 
-    if program.index(line) == (len(program) -1) and line.endswith("GORP") == False:
-        isCorrect = False
-        break
-        
+#    if program.index(line) == (len(program) -1) and line.endswith("GORP") == False:
+#        isCorrect = False
+#        break
 
+# Loop intento # 2
+
+charIndex = 0
+while isCorrect == True:
+    pass
 
 # Print dependiendo de si el programa es correcto o no
 
 if isCorrect == True:
     print("Congratulations! Your program has valid syntax.")
+    print(" ")
 
 else:
     print("Unfortunately your program does not have a valid syntax...")
+    print(" ")
+
+
+# =====================================================================================================
+
+
+# Funciones que se llaman dependiendo de la línea
 
 # TODO J
 def cName(line):
