@@ -1,9 +1,7 @@
 
-# PRUEBA PARSER.txt
-
 from inspect import isclass
 
-
+#Para que el programa lea el programa se debe agregar a la carpeta del proyecto e ingresar el nombre del archivo.
 fileName = str(input("Input your program's file name to validate its syntax: "))
 print(" ")
 
